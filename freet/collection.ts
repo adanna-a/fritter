@@ -72,7 +72,7 @@ class FreetCollection {
   static async updateOne(freetId: Types.ObjectId | string, content: string): Promise<HydratedDocument<Freet>> {
     const freet = await FreetModel.findOne({_id: freetId});
     freet.content = content;
-    freet.dateModified = new Date();
+    freet.dateModified = new Date(); 
     await freet.save();
     return freet.populate('authorId');
   }
