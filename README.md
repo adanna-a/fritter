@@ -313,3 +313,15 @@ This renders the `index.html` file that will be used to interact with the backen
 **Throws**
 
 - `403` if the user is not logged in
+
+
+#### `GET /api/likes/:freedId`
+
+#### `GET /api/likes/:userId`
+
+#### `POST /api/likes/:freetId`
+
+### `DELETE /api/likes/:freetId`
+
+#### `GET /api/trends/:country`
+
