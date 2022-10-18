@@ -41,7 +41,7 @@ const formsAndHandlers = {
   'delete-freet': deleteFreet,
   'like-freet': likeFreet,
   'unlike-freet': unlikeFreet,
-  'view-likes-by-user': viewLikesByAuthor,
+  'view-likes-by-author': viewLikesByAuthor,
 };
 
 // Attach handlers to forms
