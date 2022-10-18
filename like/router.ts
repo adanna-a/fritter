@@ -46,7 +46,6 @@ router.get(
     '/',
     [
       userValidator.isUserLoggedIn,
-      freetValidator.isFreetExists,
       likeValidator.notLiked,
     ],
     async (req: Request, res: Response) => {
