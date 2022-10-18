@@ -5,16 +5,28 @@
  * e.g. for createUser, fields has properites 'username' and 'password'
  */
 
+// `POST /api/likes`
 function likeFreet(fields) {
     fetch('/api/likes', {method: 'POST', body: JSON.stringify(fields),  headers: {'Content-Type': 'application/json'}})
       .then(showResponse)
       .catch(showResponse);
 }
 
+// `DELETE /api/likes/:id`
 function unlikeFreet(fields) {
-    fetch(`/api/likes${fields.id}`, {method: 'DELETE'})
-      .then(showResponse)
-      .catch(showResponse);
+  fetch(`/api/likes/${fields.id}`, {method: 'DELETE'})
+    .then(showResponse)
+    .catch(showResponse);
 }
 
-function viewF
+// `GET /api/likes?author=USERNAME`
+function viewLikesByAuthor(fields) {
+  fetch(`/api/likes?author=${fields.author}`)
+    .then(showResponse)
+    .catch(showResponse);
+}
+
+// // `GET /api/likes?freetId=FREET`
+// function viewLikesByFreet(fields) {
+
+// }

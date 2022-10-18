@@ -11,6 +11,9 @@ export type Like = {
   freetId: Types.ObjectId;
 };
 
+// Mongoose schema definition for interfacing with a MongoDB table
+// Likes stored in this table will have these fields, with the
+// type given by the type property, inside MongoDB
 const LikeSchema = new Schema<Like>({
   // The userId of the user that likes the freet
   userId: {

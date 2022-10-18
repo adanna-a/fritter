@@ -1,7 +1,6 @@
 import type {HydratedDocument, Types} from 'mongoose';
 import type {Like} from './model';
 import LikeModel from './model';
-import FreetCollection from '../freet/collection';
 import UserCollection from '../user/collection';
 
 class LikeCollection {

@@ -1,4 +1,4 @@
-import type {NextFunction, Request, Response} from 'express';
+import type {Request, Response} from 'express';
 import express from 'express';
 import LikeCollection from './collection';
 import * as userValidator from '../user/middleware';
@@ -8,10 +8,10 @@ import * as util from './util';
 
 const router = express.Router();
 
-/*
+/**
  * Get likes by author.
  * 
- * @name GET /api/likes?userId=id
+ * @name GET /api/likes?author=USERNAME
  * 
  * @return {LikeResponse[]} - An array of likes given by user with id userId
  * @throws {404} - If userId is not given
@@ -63,7 +63,7 @@ router.get(
   /**
  * Delete a like
  *
- * @name DELETE /api/like/:id
+ * @name DELETE /api/likes/:freetId
  *
  * @return {string} - A success message
  * @throws {403} - If the user is not logged in or is not the author of
