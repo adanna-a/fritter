@@ -1,9 +1,11 @@
-## Fritter API Routes
+# Fritter API Routes
+
+## App
 #### `GET /`
 
 This renders the `index.html` file that will be used to interact with the backend
 
-
+## Freets
 #### `GET /api/freets` - Get all the freets
 
 **Returns**
@@ -69,6 +71,7 @@ This renders the `index.html` file that will be used to interact with the backen
 - `400` if the new freet content is empty or a stream of empty spaces
 - `413` if the new freet content is more than 140 characters long
 
+## Users
 #### `POST /api/users/session` - Sign in user
 
 **Body**
@@ -143,6 +146,7 @@ This renders the `index.html` file that will be used to interact with the backen
 
 - `403` if the user is not logged in
 
+## Trends
 #### `GET /api/trends?country=COUNTRY` - Get country's trending freets
 
 **Returns**
@@ -158,7 +162,7 @@ This renders the `index.html` file that will be used to interact with the backen
 **Body**
 
 - `country` _{string}_ - The country that has the specific trends
-- `trends` _{Array<Item>}_ - The list of top trending items
+- `trend` _{Item}_ - The trending item
 
 **Returns**
 
@@ -197,6 +201,7 @@ This renders the `index.html` file that will be used to interact with the backen
 **Throws**
 - `404` if the trendId is invalid
 
+## Feeds
 #### `GET /api/feeds?author=USERNAME` - Get feeds by author
 
 **Returns**
@@ -241,6 +246,7 @@ This renders the `index.html` file that will be used to interact with the backen
 - `403` if the user is not the author of the feed
 - `404` if the feedId is invalid
 
+## Likes
 #### `GET /api/likes?author=USERNAME` - Get likes made by author
 
 **Returns**

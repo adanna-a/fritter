@@ -1,4 +1,4 @@
-import type {Request, Response} from 'express';
+import type {NextFunction, Request, Response} from 'express';
 import express from 'express';
 import LikeCollection from './collection';
 import * as userValidator from '../user/middleware';
@@ -18,17 +18,41 @@ const router = express.Router();
  * @throws {404} - If no user has given userId
  * 
  */
+/**
+ * Get likes by freet
+ * 
+ * @name GET /api/likes?freetId=FREET
+ * 
+ * @return {{'rank': number, 'likes': LikeResponse[]} - An array of likes associated with freet with if freetId}
+ * @throws {404} - If freetId not given
+ * @throws {404} - If no freet has given freetId
+ * 
+ */
 router.get(
     '/',
     [
-        userValidator.isAuthorExists
+        userValidator.isAuthorExists || freetValidator.isFreetExists,
     ],
+    async (req: Request, res: Response, next: NextFunction) => {
+
+      // Check if freetId query parameter was supplied
+      if (req.query.freetId !== undefined) {
+        console.log("OAIPNAL:N");
+        next();
+        return;
+      }
+      const userLikes = await LikeCollection.findAllByUsername(req.query.author as string);
+      const response = userLikes.map(util.constructLikeResponse);
+      res.status(200).json(response);
+    },
     async (req: Request, res: Response) => {
 
-        const userLikes = await LikeCollection.findAllByUsername(req.query.author as string);
-        const response = userLikes.map(util.constructLikeResponse);
-        res.status(200).json(response);
-    }
+      const freetLikes = await LikeCollection.findAllByFreetId(req.query.freetId as string);
+      const rank = freetLikes.length;
+      const response = {'rank': rank, 'likes': freetLikes.map(util.constructLikeResponse)};
+      res.status(200).json(response);
+    },
+    
 );
 
 /**

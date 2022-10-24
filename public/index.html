@@ -8,6 +8,7 @@
   <script src="/scripts/freet.js"></script>
   <script src="/scripts/user.js"></script>
   <script src="/scripts/like.js"></script>
+  <script src="/scripts/feed.js"></script>
   <script src="/scripts/index.js"></script>
 </head>
 
@@ -144,6 +145,77 @@
             <input id="author" name="author">
           </div>
           <input type="submit" value="View Likes By Author">
+        </form>
+
+        <form id="view-likes-by-freet">
+          <h3>View Likes By Freet</h3>
+          <div>
+            <label for="freet">Freet:</label>
+            <input id="freet" name="freet">
+          </div>
+          <input type="submit" value="View Likes By Freet">
+        </form>
+
+        <form id="view-freet-rank">
+          <h3>View Freet Rank</h3>
+          <div>
+            <label for="freet">Freet:</label>
+            <input id="freet" name="freet">
+          </div>
+          <input type="submit" value="View Freet Rank">
+        </form>
+
+        <form id="create-feed">
+          <h3>Create Feed</h3>
+          <div>
+            <label for="Name">Feed:</label>
+            <input id="Name" name="Name">
+          </div>
+          <input type="submit" value="Create Feed">
+        </form>
+
+        <form id="follow-user">
+          <h3>Follow user</h3>
+          <div>
+            <label for="Feed">Feed:</label>
+            <input id="Feed" name="Feed">
+          </div>
+          <div>
+            <label for="Username">Username:</label>
+            <input id="Username" name="Username"></input>
+          </div>
+          <input type="submit" value="Follow user">
+        </form>
+
+        <form id="unfollow-user">
+          <h3>Follow user</h3>
+          <div>
+            <label for="Feed">Feed:</label>
+            <input id="Feed" name="Feed">
+          </div>
+          <div>
+            <label for="Username">Username:</label>
+            <input id="Username" name="Username"></input>
+          </div>
+          <input type="submit" value="Unfollow user">
+        </form>
+
+        <form id="delete-feed">
+          <h3>Delete Feed</h3>
+          <div>
+            <label for="id">ID:</label>
+            <input id="id" name="id">
+          </div>
+          <input type="submit" value="Delete Feed">
+        </form>
+
+        <form id="view-feed">
+          <h3>View Feed</h3>
+          <div>
+            <label for="Feed">Feed:</label>
+            <input id="Feed" name="Feed">
+          </div>
+          <input type="submit" value="View Feed">
         </form>
       </div>
     </section>

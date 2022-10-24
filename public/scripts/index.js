@@ -42,6 +42,14 @@ const formsAndHandlers = {
   'like-freet': likeFreet,
   'unlike-freet': unlikeFreet,
   'view-likes-by-author': viewLikesByAuthor,
+  'view-likes-by-freet': viewLikesByFreet,
+  'view-freet-rank': viewFreetRank,
+  'create-feed': createFeed,
+  'follow-user': followUser,
+  'unfollow-user': unfollowUser,
+  'delete-feed': deleteFeed,
+  'view-feed': viewFeed,
+  'view-all-feeds-by-user': viewAllFeedsByUser,
 };
 
 // Attach handlers to forms

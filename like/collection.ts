@@ -48,7 +48,7 @@ class LikeCollection {
    * @param {string} freetId - The id of the freet with likes
    * @return {Promise<HydrateDocument<Like>[]>} - An array of all the likes attached to a Freet
    */
-  static async findAllByFreetId(freetId: Types.ObjectId): Promise<Array<HydratedDocument<Like>>> {
+  static async findAllByFreetId(freetId: Types.ObjectId | string): Promise<Array<HydratedDocument<Like>>> {
     return LikeModel.find({freetId}).populate('freetId');
   }
 
