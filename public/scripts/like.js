@@ -32,10 +32,3 @@ function viewLikesByFreet(fields) {
     .then(showResponse)
     .catch(showResponse)
 }
-
-// `GET /api/likes?freetId=FREET&rank=true`
-function viewFreetRank(fields) {
-  fetch(`/api/likes?freetId=${fields.freet}`)
-    .then(showResponse)
-    .catch(showResponse);
-}

@@ -63,14 +63,23 @@ class LikeCollection {
     return like !== null;
   }
 
-  // /**
-  //  * Delete all the likes for an user's freet
-  //  *
-  //  * @param {string} freetId - The id of author of freets
-  //  */
-  //  static async deleteMany(freetId: Types.ObjectId | string): Promise<void> {
-  //   await LikeModel.deleteMany({freetId});
-  // }
+  /**
+   * Delete all the likes for an user's freet
+   *
+   * @param {string} freetId - The id of the freets
+   */
+   static async deleteManyByFreet(freetId: Types.ObjectId | string): Promise<void> {
+    await LikeModel.deleteMany({freetId});
+  }
+
+  /**
+   * Delete all likes by and towards a user
+   *
+   * @param {string} authorId - The id of author of freets
+   */
+   static async deleteManyByUser(authorId: Types.ObjectId | string): Promise<void> {
+    await LikeModel.deleteMany({authorId});
+  }
 }
 
 export default LikeCollection;

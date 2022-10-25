@@ -46,6 +46,12 @@ export type Followee = {
   feedName: string;
 };
 
+export type PopulatedFollowee = {
+  _id: Types.ObjectId; // MongoDB assigns each object this ID on creation
+  authorId: User;
+  followeeId: User;
+  feedName: string;
+}
 const FolloweeSchema = new Schema<Followee>({
   authorId: {
     type: Schema.Types.ObjectId,

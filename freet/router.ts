@@ -32,6 +32,10 @@ router.get(
     if (req.query.author !== undefined) {
       next();
       return;
+    } 
+    if (req.query.country !== undefined || req.query.topic !== undefined) {
+      next('route');
+      return;
     }
 
     const allFreets = await FreetCollection.findAll();
@@ -47,6 +51,52 @@ router.get(
     res.status(200).json(response);
   }
 );
+
+/**
+ * Get freets by country.
+ *
+ * @name GET /api/freets?country=country
+ *
+ * @return {FreetResponse[]} - An array of freets associated with country, country
+ * 
+ */
+/**
+ * Get freets by topic.
+ *
+ * @name GET /api/freets?topic=topic
+ *
+ * @return {FreetResponse[]} - An array of freets associated with topic, topic
+ *
+ */
+router.get(
+  '/',
+  async (req: Request, res: Response, next: NextFunction) => {
+    if (req.query.topic !== undefined) {
+      next();
+      return;
+    }
+    const countryFreets = await FreetCollection.findAllByCountry(req.query.country as string);
+    
+    if (countryFreets.length > 0) {
+      const response = countryFreets.map(util.constructFreetResponse);
+      res.status(200).json(response);
+    } else {
+      const response = `There are no freets associated with country ${req.query.country}.`
+      res.status(200).json(response);
+    } 
+  },
+  async (req: Request, res: Response) => {
+    const topicFreets = await FreetCollection.findAllByCountry(req.query.topic as string);
+    
+    if (topicFreets.length > 0) {
+      const response = topicFreets.map(util.constructFreetResponse);
+      res.status(200).json(response);
+    } else {
+      const response = `There are no freets associated with topic ${req.query.topic}.`
+      res.status(200).json(response);
+    } 
+  }
+)
 
 /**
  * Create a new freet.
@@ -67,7 +117,7 @@ router.post(
   ],
   async (req: Request, res: Response) => {
     const userId = (req.session.userId as string) ?? ''; // Will not be an empty string since its validated in isUserLoggedIn
-    const freet = await FreetCollection.addOne(userId, req.body.content);
+    const freet = await FreetCollection.addOne(userId, req.body.content, req.body.topic || undefined, req.body.topic || undefined);
 
     res.status(201).json({
       message: 'Your freet was created successfully.',

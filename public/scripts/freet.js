@@ -1,10 +1,5 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 
-/**
- * Fields is an object mapping the names of the form inputs to the values typed in
- * e.g. for createUser, fields has properites 'username' and 'password'
- */
-
 function viewAllFreets(fields) {
   fetch('/api/freets')
     .then(showResponse)
@@ -13,6 +8,18 @@ function viewAllFreets(fields) {
 
 function viewFreetsByAuthor(fields) {
   fetch(`/api/freets?author=${fields.author}`)
+    .then(showResponse)
+    .catch(showResponse);
+}
+
+function viewFreetsByTopic() {
+  fetch(`/api/freets?topic=${fields.topic}`)
+    .then(showResponse)
+    .catch(showResponse);
+}
+
+function viewFreetsByCountry(fields) {
+  fetch(`/api/freets?country=${fields.country}`)
     .then(showResponse)
     .catch(showResponse);
 }

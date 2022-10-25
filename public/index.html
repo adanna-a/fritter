@@ -89,12 +89,86 @@
           <input type="submit" value="View Freets By Author">
         </form>
 
+        <form id="view-freets-by-country">
+          <h3>View Freets By Country</h3>
+          <div>
+            <label for="country">Country:</label>
+            <select id="country" name="country">
+              <option value="USA">USA</option>
+              <option value="India">India</option>
+              <option value="Nigeria">Nigeria</option>
+              <option value="Japan">Japan</option>
+              <option value="Brazil">Brazil</option>
+              <option value="UK">UK</option>
+              <option value="Ghana">Ghana</option>
+              <option value="Thailand">Thailand</option>
+              <option value="Philippines">Philippines</option>
+              <option value="France">France</option>
+            </select>
+          </div>
+          <input type="submit" value="View Freets By Country">
+        </form>
+
+        <form id="view-freets-by-topic">
+          <h3>View Freets By Topic</h3>
+          <div>
+            <label for="topic">Topic:</label>
+            <select id="topic" name="topic">
+              <option value="Music">Music</option>
+              <option value="Tech">Tech</option>
+              <option value="Activism">Activism</option>
+              <option value="Funny">Funny</option>
+              <option value="Movies">Movies</option>
+              <option value="Sports">Sports</option>
+              <option value="Politics">Politics</option>
+              <option value="News">News</option>
+              <option value="Academia">Acamedia</option>
+              <option value="Health">Health</option>
+            </select>
+          </div>
+          <input type="submit" value="View Freets By Topic">
+        </form>
+
         <form id="create-freet">
           <h3>Create Freet</h3>
           <div>
             <label for="content">Content:</label>
             <textarea id="content" name="content"></textarea>
           </div>
+          <div>
+            <label for="country">Country:</label>
+            <select id="country" name="country">
+              <option value=""></option>
+              <option value="USA">USA</option>
+              <option value="India">India</option>
+              <option value="Nigeria">Nigeria</option>
+              <option value="Japan">Japan</option>
+              <option value="Brazil">Brazil</option>
+              <option value="UK">UK</option>
+              <option value="Ghana">Ghana</option>
+              <option value="Thailand">Thailand</option>
+              <option value="Philippines">Philippines</option>
+              <option value="France">France</option>
+            </select>
+          </div>
+          <div>
+            <label for="topic">Topic:</label>
+            <select id="topic" name="topic">
+              <option value=""></option>
+              <option value="Music">Music</option>
+              <option value="Tech">Tech</option>
+              <option value="Activism">Activism</option>
+              <option value="Funny">Funny</option>
+              <option value="Movies">Movies</option>
+              <option value="Sports">Sports</option>
+              <option value="Politics">Politics</option>
+              <option value="News">News</option>
+              <option value="Academia">Acamedia</option>
+              <option value="Health">Health</option>
+            </select>
+          </div>
+
+
           <input type="submit" value="Create Freet">
         </form>
 
@@ -165,15 +239,6 @@
           <input type="submit" value="View Freet Rank">
         </form>
 
-        <form id="create-feed">
-          <h3>Create Feed</h3>
-          <div>
-            <label for="Name">Feed:</label>
-            <input id="Name" name="Name">
-          </div>
-          <input type="submit" value="Create Feed">
-        </form>
-
         <form id="follow-user">
           <h3>Follow user</h3>
           <div>
@@ -217,6 +282,48 @@
           </div>
           <input type="submit" value="View Feed">
         </form>
+
+        <form id="create-comment">
+          <h3>Create Comment</h3>
+          <div>
+            <label for="id">ID:</label>
+            <input id="id" name="id">
+          </div>
+          <div>
+            <label for="content">Content:</label>
+            <textarea id="content" name="content"></textarea>
+          </div>
+          <input type="submit" value="Create Comment">
+        </form>
+        
+        <form id="delete-comment">
+          <h3>Delete Comment</h3>
+          <div>
+            <label for="id">ID:</label>
+            <input id="id" name="id">
+          </div>
+          <input type="submit" value="Delete Comment">
+        </form>
+
+        <form id="view-comments-by-author">
+          <h3>View Comments By Author</h3>
+          <div>
+            <label for="author">Author:</label>
+            <input id="author" name="author">
+          </div>
+          <input type="submit" value="View Comments By Author">
+        </form>
+
+        <form id="view-Comments-by-freet">
+          <h3>View Comments By Freet</h3>
+          <div>
+            <label for="freetId">Freet:</label>
+            <input id="freetId" name="freetId">
+          </div>
+          <input type="submit" value="View Comments By Freet">
+        </form>
+
+
       </div>
     </section>
     <section>

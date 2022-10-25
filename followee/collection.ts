@@ -62,8 +62,17 @@ class FolloweeCollection {
    * @param {string} authorId - The id of the user that created the feed
    * @param {string} feedName - The name of the feed
    */
-   static async deleteMany(authorId: Types.ObjectId | string, feedName: Types.ObjectId | string): Promise<void> {
+   static async deleteSome(authorId: Types.ObjectId | string, feedName: Types.ObjectId | string): Promise<void> {
     await FolloweeModel.deleteMany({authorId, feedName});
+  }
+
+  /**
+   * Delete all feeds for a user
+   * 
+   * @param {string} authorId - The id of the user that created the feed
+   */
+   static async deleteMany(authorId: Types.ObjectId | string): Promise<void> {
+    await FolloweeModel.deleteMany({authorId});
   }
 }
 

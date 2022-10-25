@@ -65,7 +65,7 @@ router.delete(
     [],
     async (req: Request, res: Response) => {
         const authorId = (req.session.userId as string) ?? '';
-        await FolloweeCollection.deleteMany(authorId, req.query.feedName as string);
+        await FolloweeCollection.deleteSome(authorId, req.query.feedName as string);
         res.status(200).json({
             message: 'You deleted your feed successfully.'
           });

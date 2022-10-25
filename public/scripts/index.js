@@ -36,6 +36,8 @@ const formsAndHandlers = {
   'sign-out': signOut,
   'view-all-freets': viewAllFreets,
   'view-freets-by-author': viewFreetsByAuthor,
+  'view-freets-by-topic': viewFreetsByTopic,
+  'view-freets-by-country': viewFreetsByCountry,
   'create-freet': createFreet,
   'edit-freet': editFreet,
   'delete-freet': deleteFreet,
@@ -43,13 +45,14 @@ const formsAndHandlers = {
   'unlike-freet': unlikeFreet,
   'view-likes-by-author': viewLikesByAuthor,
   'view-likes-by-freet': viewLikesByFreet,
-  'view-freet-rank': viewFreetRank,
-  'create-feed': createFeed,
   'follow-user': followUser,
   'unfollow-user': unfollowUser,
   'delete-feed': deleteFeed,
   'view-feed': viewFeed,
-  'view-all-feeds-by-user': viewAllFeedsByUser,
+  'create-comment': createComment,
+  'delete-comment': deleteComment,
+  'view-comments-by-author': viewCommentsByAuthor,
+  'view-comments-by-freet': viewCommentsByFreet,
 };
 
 // Attach handlers to forms

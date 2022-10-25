@@ -9,6 +9,8 @@ type FreetResponse = {
   dateCreated: string;
   content: string;
   dateModified: string;
+  topic: string;
+  country: string;
 };
 
 /**

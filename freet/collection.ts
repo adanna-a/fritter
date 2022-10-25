@@ -17,15 +17,19 @@ class FreetCollection {
    *
    * @param {string} authorId - The id of the author of the freet
    * @param {string} content - The id of the content of the freet
+   * @param {string} topic - The topic of the freet
+   * @param {string} country - The location associated with the freet
    * @return {Promise<HydratedDocument<Freet>>} - The newly created freet
    */
-  static async addOne(authorId: Types.ObjectId | string, content: string): Promise<HydratedDocument<Freet>> {
+  static async addOne(authorId: Types.ObjectId | string, content: string, topic?: string, country?: string): Promise<HydratedDocument<Freet>> {
     const date = new Date();
     const freet = new FreetModel({
       authorId,
       dateCreated: date,
       content,
-      dateModified: date
+      dateModified: date,
+      topic: topic || null,
+      country: country || null,
     });
     await freet.save(); // Saves freet to MongoDB
     return freet.populate('authorId');
@@ -60,6 +64,26 @@ class FreetCollection {
   static async findAllByUsername(username: string): Promise<Array<HydratedDocument<Freet>>> {
     const author = await UserCollection.findOneByUsername(username);
     return FreetModel.find({authorId: author._id}).populate('authorId');
+  }
+
+  /**
+   * Get all the freets under a given topic
+   *
+   * @param {string} topic - The topic requested of the freets
+   * @return {Promise<HydratedDocument<Freet>[]>} - An array of all of the freets
+   */
+   static async findAllByTopic(topic: string): Promise<Array<HydratedDocument<Freet>>> {
+    return FreetModel.find({topic}).populate('topic');
+  }
+
+  /**
+   * Get all the freets under a given country
+   *
+   * @param {string} topic - The topic requested of the freets
+   * @return {Promise<HydratedDocument<Freet>[]>} - An array of all of the freets
+   */
+   static async findAllByCountry(country: string): Promise<Array<HydratedDocument<Freet>>> {
+    return FreetModel.find({country}).populate('country');
   }
 
   /**
