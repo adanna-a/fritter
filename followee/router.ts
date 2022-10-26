@@ -92,3 +92,5 @@ router.get(
     res.status(200).json(response);
   }
 )
+
+export {router as followeeRouter};

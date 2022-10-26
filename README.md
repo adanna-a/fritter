@@ -23,6 +23,22 @@ This renders the `index.html` file that will be used to interact with the backen
 - `400` if `author` is not given
 - `404` if `author` is not a recognized username of any user
 
+#### `GET /api/freets?topic=TOPIC` - Get freets by topic
+
+**Returns**
+
+- An array of freets associated with a topic `topic`
+
+**Throws**
+
+#### `GET /api/freets?country=COUNTRY` - Get freets by topic
+
+**Returns**
+
+- An array of freets associated with a country `country`
+
+**Throws**
+
 #### `POST /api/freets` - Create a new freet
 
 **Body**
@@ -173,7 +189,7 @@ This renders the `index.html` file that will be used to interact with the backen
 
 - `403` if the user is not logged in
 - `400` If the country is empty or a stream of empty spaces
-- `413` If trends is empty 
+- `413` If no item given
 
 #### `PUT /api/trends/:trendId?` - Update an existing trend
 
@@ -296,3 +312,38 @@ This renders the `index.html` file that will be used to interact with the backen
 - `404` if the likeId is invalid
 
 
+<!-- User
+- username: User -> one Username
+- password: User -> one Password
+- userId: User -> one UserId
+
+Freet
+- author: Freet -> one User
+- content: Freet -> one Content
+- dateCreated: Freet -> one Date
+- dateModified: Freet -> one Date
+- id: Freet -> one FreetId
+- topic: Freet -> lone Topic
+- country: Freet -> lone Country
+
+Like[Item]
+- author: Like -> one User
+- likedItem: Item -> one Item
+
+Followee
+- follower: Followee -> one User
+- followee: Followee -> one User
+- feedName: Followee -> one String
+
+Comment[Item]
+- author: Comment -> one User
+- content: Item -> one Content
+- 
+App Definition
+app Fritter
+concepts
+User
+Freet 
+Like[Freet.Freet]
+Followee
+Comment[Freet.Freet] -->
