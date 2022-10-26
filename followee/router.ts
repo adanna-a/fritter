@@ -13,7 +13,7 @@ const router = express.Router();
  * @name POST /api/followees
  * 
  * @param {string} feedName - The name of the feed
- * @param {string} followeeUsername - The username of the user being followed
+ * @param {string} username - The username of the user being followed
  * @return {FolloweeResponse}
  * @throws
  */

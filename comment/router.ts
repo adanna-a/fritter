@@ -19,12 +19,15 @@ const router = express.Router();
  * @throws {403} - If the user is not logged in
  * @throws {400} - If the comment content is empty or a stream of empty spaces
  * @throws {413} - If the comment content is more than 140 characters long
+ * @throws {400} - If freetId is not given
+ * @throws {404} - If the freetId is invalid
  */
  router.post(
   '/',
   [
     userValidator.isUserLoggedIn,
-    commentValidator.isValidCommentContent
+    commentValidator.isValidCommentContent,
+    freetValidator.isFreetBodyExists
   ],
   async (req: Request, res: Response) => {
     const userId = (req.session.userId as string) ?? ''; // Will not be an empty string since its validated in isUserLoggedIn
@@ -38,21 +41,22 @@ const router = express.Router();
 );
 
 /**
- * Get all the comments
+ * Get all the comments made by an author.
  *
- * @name GET /api/comments
+ * @name GET /api/comments?author=USERNAME
  *
- * @return {CommentResponse[]} - A list of all the comments sorted in descending
- *                      order by date created
+ * @return {CommentResponse[]} - An array of comments made by user with username, author
+ * @throws {400} - If author is not given
+ * @throws {404} - If author is not a recognized username of any user
  */
 /**
- * Get freets by author.
+ * Get comments made on a specific freet.
  *
- * @name GET /api/comments?authorId=id
+ * @name GET /api/likes?freetId=FREET
  *
- * @return {CommentResponse[]} - An array of freets created by user with id, authorId
- * @throws {400} - If authorId is not given
- * @throws {404} - If no user has given authorId
+ * @return {CommentResponse[]} - An array of comments made towards freet with freetId 
+ * @throws {400} - If freetId is not given
+ * @throws {404} - If the freetId is invalid
  *
  */
  router.get(
@@ -67,10 +71,6 @@ const router = express.Router();
         next('route');
         return;
       }
-  
-      const allComments = await CommentCollection.findAll();
-      const response = allComments.map(util.constructCommentResponse);
-      res.status(200).json(response);
     },
     [
       userValidator.isAuthorExists
@@ -81,15 +81,6 @@ const router = express.Router();
       res.status(200).json(response);
     }
   );
-  
-  /**
-   * Get comments by freet.
-   *
-   * @name GET /api/comments?freetId=id
-   *
-   * @return {FreetResponse[]} - An array of comments associated with freet id, freetId
-   * 
-   */
   router.get(
     '/',
     [freetValidator.isFreetQueryExists],
@@ -98,22 +89,16 @@ const router = express.Router();
         next();
         return;
       }
-      const freetComments = await CommentCollection.findAllByFreet(req.query.country as string);
-      
-      if (freetComments.length > 0) {
-        const response = freetComments.map(util.constructCommentResponse);
-        res.status(200).json(response);
-      } else {
-        const response = `There are no comments associated with this freet ${req.query.country}.`
-        res.status(200).json(response);
-      } 
-    },
+      const freetComments = await CommentCollection.findAllByFreet(req.query.freetId as string);
+      const response = freetComments.map(util.constructCommentResponse);
+      res.status(200).json(response);
+    }
   )
   
   /**
    * Delete a comment
    *
-   * @name DELETE /api/comments/:id
+   * @name DELETE /api/comments/:commentId
    *
    * @return {string} - A success message
    * @throws {403} - If the user is not logged in or is not the author of
@@ -134,5 +119,4 @@ const router = express.Router();
       });
     }
   );
-
 export {router as commentRouter};
