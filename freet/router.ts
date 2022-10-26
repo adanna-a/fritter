@@ -45,50 +45,44 @@ router.get(
   '/',
   async (req: Request, res: Response, next: NextFunction) => {
     // Check if authorId query parameter was supplied
-    return res.status(200).json(req.query);
+    if (req.query.author !== undefined) {
+      next();
+      return;
+    } else if (req.query.topic !== undefined) {
+      const topicFreets = await FreetCollection.findAllByCountry(req.query.topic as string);
+    
+      if (topicFreets.length > 0) {
+        const response = topicFreets.map(util.constructFreetResponse);
+        res.status(200).json(response);
+      } else {
+        const response = `There are no freets associated with topic ${req.query.topic}.`
+        res.status(200).json(response);
+      } 
+      return; 
+    } else if (req.query.country !== undefined) {
+      const countryFreets = await FreetCollection.findAllByCountry(req.query.country as string);
+    
+      if (countryFreets.length > 0) {
+        const response = countryFreets.map(util.constructFreetResponse);
+        res.status(200).json(response);
+      } else {
+        const response = `There are no freets associated with country ${req.query.country}.`
+        res.status(200).json(response);
+      } 
+      return;
+    }
+    const allFreets = await FreetCollection.findAll();
+    const response = allFreets.map(util.constructFreetResponse);
+    res.status(200).json(response);
+  },
+  [
+    userValidator.isAuthorExists
+  ],
+  async (req: Request, res: Response) => {
+    const authorFreets = await FreetCollection.findAllByUsername(req.query.author as string);
+    const response = authorFreets.map(util.constructFreetResponse);
+    res.status(200).json(response);
   }
-  //   if (req.query.country !== undefined) {
-  //     return res.status(200).json("HELP ME");
-  //   }
-  //   if (req.query.author !== undefined) {
-  //     next();
-  //     return;
-  //   } else if (req.query.topic !== undefined) {
-  //     const topicFreets = await FreetCollection.findAllByCountry(req.query.topic as string);
-    
-  //     if (topicFreets.length > 0) {
-  //       const response = topicFreets.map(util.constructFreetResponse);
-  //       res.status(200).json(response);
-  //     } else {
-  //       const response = `There are no freets associated with topic ${req.query.topic}.`
-  //       res.status(200).json(response);
-  //     } 
-  //     return; 
-  //   } else if (req.query.country !== undefined) {
-  //     const countryFreets = await FreetCollection.findAllByCountry(req.query.country as string);
-    
-  //     if (countryFreets.length > 0) {
-  //       const response = countryFreets.map(util.constructFreetResponse);
-  //       res.status(200).json(response);
-  //     } else {
-  //       const response = `There are no freets associated with country ${req.query.country}.`
-  //       res.status(200).json(response);
-  //     } 
-  //     return;
-  //   } else {
-  //     const allFreets = await FreetCollection.findAll();
-  //     const response = allFreets.map(util.constructFreetResponse);
-  //     res.status(200).json(response);
-  //   }
-  // },
-  // [
-  //   userValidator.isAuthorExists
-  // ],
-  // async (req: Request, res: Response) => {
-  //   const authorFreets = await FreetCollection.findAllByUsername(req.query.author as string);
-  //   const response = authorFreets.map(util.constructFreetResponse);
-  //   res.status(200).json(response);
-  // }
 );
 
 /**

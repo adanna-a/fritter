@@ -9,6 +9,35 @@ import * as util from './util';
 const router = express.Router();
 
 /**
+ * Create a new comment.
+ *
+ * @name POST /api/comments
+ *
+ * @param {string} content - The content of the comment
+ * @param {string} freetId - The id of the freet being commented on 
+ * @return {CommentResponse} - The created comment
+ * @throws {403} - If the user is not logged in
+ * @throws {400} - If the comment content is empty or a stream of empty spaces
+ * @throws {413} - If the comment content is more than 140 characters long
+ */
+ router.post(
+  '/',
+  [
+    userValidator.isUserLoggedIn,
+    commentValidator.isValidCommentContent
+  ],
+  async (req: Request, res: Response) => {
+    const userId = (req.session.userId as string) ?? ''; // Will not be an empty string since its validated in isUserLoggedIn
+    const comment = await CommentCollection.addOne(userId, req.body.id, req.body.content);
+
+    res.status(201).json({
+      message: 'Your comment was created successfully.',
+      comment: util.constructCommentResponse(comment)
+    });
+  }
+);
+
+/**
  * Get all the comments
  *
  * @name GET /api/comments
@@ -80,35 +109,6 @@ const router = express.Router();
       } 
     },
   )
-
-/**
- * Create a new comment.
- *
- * @name POST /api/comments
- *
- * @param {string} content - The content of the comment
- * @param {string} freetId - The id of the freet being commented on 
- * @return {CommentResponse} - The created comment
- * @throws {403} - If the user is not logged in
- * @throws {400} - If the comment content is empty or a stream of empty spaces
- * @throws {413} - If the comment content is more than 140 characters long
- */
- router.post(
-    '/',
-    [
-      userValidator.isUserLoggedIn,
-      commentValidator.isValidCommentContent
-    ],
-    async (req: Request, res: Response) => {
-      const userId = (req.session.userId as string) ?? ''; // Will not be an empty string since its validated in isUserLoggedIn
-      const comment = await CommentCollection.addOne(userId, req.body.id, req.body.content);
-  
-      res.status(201).json({
-        message: 'Your comment was created successfully.',
-        comment: util.constructCommentResponse(comment)
-      });
-    }
-  );
   
   /**
    * Delete a comment

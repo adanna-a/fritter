@@ -1,5 +1,5 @@
 import type {HydratedDocument, Types} from 'mongoose';
-import UserCollection from 'user/collection';
+import UserCollection from '../user/collection';
 import type {Followee} from './model';
 import FolloweeModel from './model';
 
