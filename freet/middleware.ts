@@ -1,4 +1,5 @@
 import type {Request, Response, NextFunction} from 'express';
+import FolloweeCollection from 'followee/collection';
 import {Types} from 'mongoose';
 import FreetCollection from '../freet/collection';
 

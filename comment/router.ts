@@ -50,7 +50,7 @@ const router = express.Router();
  * @throws {404} - If author is not a recognized username of any user
  */
 /**
- * Get comments made on a specific freet.
+ * Get comments made on a specific fsreet.
  *
  * @name GET /api/likes?freetId=FREET
  *

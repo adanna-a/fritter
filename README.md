@@ -136,7 +136,6 @@ This renders the `index.html` file that will be used to interact with the backen
 - An object with followee's details 
 
 **Throws**
-- `404` if `username` is not a recognized username of any user
 - `401` if the user login credentials are invalid
 - `400` if the feedName is empty or a stream of empty spaces
 - `413` if the new freet content is more than 50 characters long
