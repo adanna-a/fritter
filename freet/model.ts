@@ -52,12 +52,12 @@ const FreetSchema = new Schema<Freet>({
   // The topic of the freet
   topic: {
     type: String,
-    required: false
+    required: true,
   },
   // The location associated with the freet
   country: {
     type: String, 
-    required: false
+    required: true,
   }
 });
 

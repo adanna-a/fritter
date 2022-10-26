@@ -25,33 +25,6 @@ const router = express.Router();
  * @throws {404} - If no user has given authorId
  *
  */
-router.get(
-  '/',
-  async (req: Request, res: Response, next: NextFunction) => {
-    // Check if authorId query parameter was supplied
-    if (req.query.author !== undefined) {
-      next();
-      return;
-    } 
-    if (req.query.country !== undefined || req.query.topic !== undefined) {
-      next('route');
-      return;
-    }
-
-    const allFreets = await FreetCollection.findAll();
-    const response = allFreets.map(util.constructFreetResponse);
-    res.status(200).json(response);
-  },
-  [
-    userValidator.isAuthorExists
-  ],
-  async (req: Request, res: Response) => {
-    const authorFreets = await FreetCollection.findAllByUsername(req.query.author as string);
-    const response = authorFreets.map(util.constructFreetResponse);
-    res.status(200).json(response);
-  }
-);
-
 /**
  * Get freets by country.
  *
@@ -71,32 +44,52 @@ router.get(
 router.get(
   '/',
   async (req: Request, res: Response, next: NextFunction) => {
-    if (req.query.topic !== undefined) {
-      next();
-      return;
-    }
-    const countryFreets = await FreetCollection.findAllByCountry(req.query.country as string);
-    
-    if (countryFreets.length > 0) {
-      const response = countryFreets.map(util.constructFreetResponse);
-      res.status(200).json(response);
-    } else {
-      const response = `There are no freets associated with country ${req.query.country}.`
-      res.status(200).json(response);
-    } 
-  },
-  async (req: Request, res: Response) => {
-    const topicFreets = await FreetCollection.findAllByCountry(req.query.topic as string);
-    
-    if (topicFreets.length > 0) {
-      const response = topicFreets.map(util.constructFreetResponse);
-      res.status(200).json(response);
-    } else {
-      const response = `There are no freets associated with topic ${req.query.topic}.`
-      res.status(200).json(response);
-    } 
+    // Check if authorId query parameter was supplied
+    return res.status(200).json(req.query);
   }
-)
+  //   if (req.query.country !== undefined) {
+  //     return res.status(200).json("HELP ME");
+  //   }
+  //   if (req.query.author !== undefined) {
+  //     next();
+  //     return;
+  //   } else if (req.query.topic !== undefined) {
+  //     const topicFreets = await FreetCollection.findAllByCountry(req.query.topic as string);
+    
+  //     if (topicFreets.length > 0) {
+  //       const response = topicFreets.map(util.constructFreetResponse);
+  //       res.status(200).json(response);
+  //     } else {
+  //       const response = `There are no freets associated with topic ${req.query.topic}.`
+  //       res.status(200).json(response);
+  //     } 
+  //     return; 
+  //   } else if (req.query.country !== undefined) {
+  //     const countryFreets = await FreetCollection.findAllByCountry(req.query.country as string);
+    
+  //     if (countryFreets.length > 0) {
+  //       const response = countryFreets.map(util.constructFreetResponse);
+  //       res.status(200).json(response);
+  //     } else {
+  //       const response = `There are no freets associated with country ${req.query.country}.`
+  //       res.status(200).json(response);
+  //     } 
+  //     return;
+  //   } else {
+  //     const allFreets = await FreetCollection.findAll();
+  //     const response = allFreets.map(util.constructFreetResponse);
+  //     res.status(200).json(response);
+  //   }
+  // },
+  // [
+  //   userValidator.isAuthorExists
+  // ],
+  // async (req: Request, res: Response) => {
+  //   const authorFreets = await FreetCollection.findAllByUsername(req.query.author as string);
+  //   const response = authorFreets.map(util.constructFreetResponse);
+  //   res.status(200).json(response);
+  // }
+);
 
 /**
  * Create a new freet.
@@ -117,7 +110,7 @@ router.post(
   ],
   async (req: Request, res: Response) => {
     const userId = (req.session.userId as string) ?? ''; // Will not be an empty string since its validated in isUserLoggedIn
-    const freet = await FreetCollection.addOne(userId, req.body.content, req.body.topic || undefined, req.body.topic || undefined);
+    const freet = await FreetCollection.addOne(userId, req.body.content, req.body.topic, req.body.country);
 
     res.status(201).json({
       message: 'Your freet was created successfully.',

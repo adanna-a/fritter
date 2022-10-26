@@ -21,15 +21,15 @@ class FreetCollection {
    * @param {string} country - The location associated with the freet
    * @return {Promise<HydratedDocument<Freet>>} - The newly created freet
    */
-  static async addOne(authorId: Types.ObjectId | string, content: string, topic?: string, country?: string): Promise<HydratedDocument<Freet>> {
+  static async addOne(authorId: Types.ObjectId | string, content: string, topic: string, country: string): Promise<HydratedDocument<Freet>> {
     const date = new Date();
     const freet = new FreetModel({
       authorId,
       dateCreated: date,
       content,
       dateModified: date,
-      topic: topic || null,
-      country: country || null,
+      topic: topic,
+      country: country,
     });
     await freet.save(); // Saves freet to MongoDB
     return freet.populate('authorId');
@@ -79,7 +79,7 @@ class FreetCollection {
   /**
    * Get all the freets under a given country
    *
-   * @param {string} topic - The topic requested of the freets
+   * @param {string} country - The country requested of the freets
    * @return {Promise<HydratedDocument<Freet>[]>} - An array of all of the freets
    */
    static async findAllByCountry(country: string): Promise<Array<HydratedDocument<Freet>>> {

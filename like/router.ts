@@ -30,31 +30,31 @@ const router = express.Router();
  */
 router.get(
     '/',
-    [
-        userValidator.isAuthorExists || freetValidator.isFreetExists,
-    ],
     async (req: Request, res: Response, next: NextFunction) => {
 
-      // Check if freetId query parameter was supplied
-      if (req.query.freetId !== undefined) {
-        console.log("OAIPNAL:N");
-        next();
-        return;
-      }
+      if (req.query.userId !== undefined) next();
+      else if (req.query.freetId !== undefined) next('route');
+    },
+    [
+      userValidator.isAuthorExists
+    ],
+    async (req: Request, res: Response, next: NextFunction) => {
       const userLikes = await LikeCollection.findAllByUsername(req.query.author as string);
       const response = userLikes.map(util.constructLikeResponse);
       res.status(200).json(response);
-    },
-    async (req: Request, res: Response) => {
-
-      const freetLikes = await LikeCollection.findAllByFreetId(req.query.freetId as string);
-      const rank = freetLikes.length;
-      const response = {'rank': rank, 'likes': freetLikes.map(util.constructLikeResponse)};
-      res.status(200).json(response);
-    },
-    
+    } 
 );
+router.get(
+  '/',
+  [freetValidator.isFreetQueryExists],
+  async (req: Request, res: Response) => {
 
+    const freetLikes = await LikeCollection.findAllByFreetId(req.query.freetId as string);
+    const rank = freetLikes.length;
+    const response = {'rank': rank, 'likes': freetLikes.map(util.constructLikeResponse)};
+    res.status(200).json(response);
+  },
+)
 /**
  * Add a new like.
  *

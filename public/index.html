@@ -8,7 +8,8 @@
   <script src="/scripts/freet.js"></script>
   <script src="/scripts/user.js"></script>
   <script src="/scripts/like.js"></script>
-  <script src="/scripts/feed.js"></script>
+  <script src="/scripts/followee.js"></script>
+  <script src="/scripts/comment.js"></script>
   <script src="/scripts/index.js"></script>
 </head>
 
@@ -91,40 +92,20 @@
 
         <form id="view-freets-by-country">
           <h3>View Freets By Country</h3>
+          <h4>USA, India, Nigeria, Japan, Brazil, UK, Ghana, Thailand, Philippines, France</h4>
           <div>
             <label for="country">Country:</label>
-            <select id="country" name="country">
-              <option value="USA">USA</option>
-              <option value="India">India</option>
-              <option value="Nigeria">Nigeria</option>
-              <option value="Japan">Japan</option>
-              <option value="Brazil">Brazil</option>
-              <option value="UK">UK</option>
-              <option value="Ghana">Ghana</option>
-              <option value="Thailand">Thailand</option>
-              <option value="Philippines">Philippines</option>
-              <option value="France">France</option>
-            </select>
+            <input id="country" name="country">
           </div>
           <input type="submit" value="View Freets By Country">
         </form>
 
         <form id="view-freets-by-topic">
           <h3>View Freets By Topic</h3>
+          <h4>Music, Tech, Activism, Funny, Movies, Sports, Politics, News, Academia, Health</h4>
           <div>
             <label for="topic">Topic:</label>
-            <select id="topic" name="topic">
-              <option value="Music">Music</option>
-              <option value="Tech">Tech</option>
-              <option value="Activism">Activism</option>
-              <option value="Funny">Funny</option>
-              <option value="Movies">Movies</option>
-              <option value="Sports">Sports</option>
-              <option value="Politics">Politics</option>
-              <option value="News">News</option>
-              <option value="Academia">Acamedia</option>
-              <option value="Health">Health</option>
-            </select>
+            <input id="topic" name="topic">
           </div>
           <input type="submit" value="View Freets By Topic">
         </form>
@@ -136,39 +117,15 @@
             <textarea id="content" name="content"></textarea>
           </div>
           <div>
+            <h4>USA, India, Nigeria, Japan, Brazil, UK, Ghana, Thailand, Philippines, France</h4>
             <label for="country">Country:</label>
-            <select id="country" name="country">
-              <option value=""></option>
-              <option value="USA">USA</option>
-              <option value="India">India</option>
-              <option value="Nigeria">Nigeria</option>
-              <option value="Japan">Japan</option>
-              <option value="Brazil">Brazil</option>
-              <option value="UK">UK</option>
-              <option value="Ghana">Ghana</option>
-              <option value="Thailand">Thailand</option>
-              <option value="Philippines">Philippines</option>
-              <option value="France">France</option>
-            </select>
+            <input id="country" name="country">
           </div>
           <div>
+            <h4>Music, Tech, Activism, Funny, Movies, Sports, Politics, News, Academia, Health</h4>
             <label for="topic">Topic:</label>
-            <select id="topic" name="topic">
-              <option value=""></option>
-              <option value="Music">Music</option>
-              <option value="Tech">Tech</option>
-              <option value="Activism">Activism</option>
-              <option value="Funny">Funny</option>
-              <option value="Movies">Movies</option>
-              <option value="Sports">Sports</option>
-              <option value="Politics">Politics</option>
-              <option value="News">News</option>
-              <option value="Academia">Acamedia</option>
-              <option value="Health">Health</option>
-            </select>
+            <input id="topic" name="topic">
           </div>
-
-
           <input type="submit" value="Create Freet">
         </form>
 
@@ -242,12 +199,12 @@
         <form id="follow-user">
           <h3>Follow user</h3>
           <div>
-            <label for="Feed">Feed:</label>
-            <input id="Feed" name="Feed">
+            <label for="feed">Feed:</label>
+            <input id="feed" name="feed">
           </div>
           <div>
-            <label for="Username">Username:</label>
-            <input id="Username" name="Username"></input>
+            <label for="username">Username:</label>
+            <input id="username" name="username"></input>
           </div>
           <input type="submit" value="Follow user">
         </form>
