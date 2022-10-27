@@ -13,7 +13,7 @@ function unfollowUser(fields) {
 }
 
 function deleteFeed(fields) {
-  fetch(`/api/followees?feedName=${fields.feedName}`)
+  fetch(`/api/followees?feedName=${fields.id}`)
     .then(showResponse)
     .catch(showResponse);
 }

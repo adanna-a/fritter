@@ -13,7 +13,7 @@ const router = express.Router();
  * 
  * @name POST /api/followees
  * 
- * @param {string} feedName - The name of the feed that the user is following the other user on
+ * @param {string} feed - The name of the feed that the user is following the other user on
  * @param {string} username - The username of the user being followed
  * @return {FolloweeResponse} - An object with followee's details 
  * @throws {400} - If the feedName is empty or a stream of empty spaces
@@ -28,7 +28,7 @@ router.post(
   ],
   async (req: Request, res: Response) => {
     const authorId = (req.session.userId as string) ?? '';
-    const followee = await FolloweeCollection.addOne(authorId, req.body.username, req.body.feedName);
+    const followee = await FolloweeCollection.addOne(authorId, req.body.username, req.body.feed);
 
     res.status(201).json({
         message: `You followed user ${req.body.username} on the feed ${req.body.feedName}, successfully.`,

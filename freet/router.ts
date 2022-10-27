@@ -49,7 +49,7 @@ router.get(
       next();
       return;
     } else if (req.query.topic !== undefined) {
-      const topicFreets = await FreetCollection.findAllByCountry(req.query.topic as string);
+      const topicFreets = await FreetCollection.findAllByTopic(req.query.topic as string);
     
       if (topicFreets.length > 0) {
         const response = topicFreets.map(util.constructFreetResponse);
@@ -160,7 +160,7 @@ router.put(
     freetValidator.isValidFreetContent
   ],
   async (req: Request, res: Response) => {
-    const freet = await FreetCollection.updateOne(req.params.freetId, req.body.content);
+    const freet = await FreetCollection.updateOne(req.params.freetId, req.body.content, req.body.topic, req.body.country);
     res.status(200).json({
       message: 'Your freet was updated successfully.',
       freet: util.constructFreetResponse(freet)

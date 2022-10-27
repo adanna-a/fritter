@@ -85,10 +85,6 @@ const router = express.Router();
     '/',
     [freetValidator.isFreetQueryExists],
     async (req: Request, res: Response, next: NextFunction) => {
-      if (req.query.freetId !== undefined) {
-        next();
-        return;
-      }
       const freetComments = await CommentCollection.findAllByFreet(req.query.freetId as string);
       const response = freetComments.map(util.constructCommentResponse);
       res.status(200).json(response);
