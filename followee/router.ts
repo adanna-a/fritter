@@ -22,7 +22,7 @@ const router = express.Router();
 router.post(
   '/',
   [
-    freetValidator.isFreetBodyExists,
+    followeeValidator.isFolloweeUserExists,
     followeeValidator.isValidFeedNameContent,
 
   ],
@@ -96,7 +96,7 @@ router.delete(
 router.get(
   '/',
   [
-    followeeValidator.isFolloweeQueryExists
+    followeeValidator.isFolloweeQueryExists,
   ],
   async (req: Request, res: Response) => {
     const authorId = (req.session.userId as string) ?? ''; // Will not be an empty string since its validated in isUserLoggedIn

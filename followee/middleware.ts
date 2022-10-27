@@ -1,7 +1,7 @@
 import type {Request, Response, NextFunction} from 'express';
 import {Types} from 'mongoose';
 import FolloweeCollection from '../followee/collection';
-
+import UserCollection from '../user/collection';
 
 /**
  * Checks if the content of the feedName in req.body is valid, i.e not a stream of empty
@@ -48,7 +48,9 @@ import FolloweeCollection from '../followee/collection';
  const isFolloweeExists = async (req: Request, res: Response, next: NextFunction) => {
     const {feedName} = req.body as {feedName: string;};
 
-    if (!feedName) {
+    console.log(feedName);
+;
+    if (feedName.length < 1) {
         res.status(400).json({error: `Missing the feedName`})
     }
 
@@ -102,10 +104,33 @@ import FolloweeCollection from '../followee/collection';
     }
  }
 
+ /**
+ * Checks if a user with userId as author id in req.body exists
+ */
+  const isFolloweeUserExists = async (req: Request, res: Response, next: NextFunction) => {
+    if (!req.body.username) {
+      res.status(400).json({
+        error: 'Provided followee username must be nonempty.'
+      });
+      return;
+    }
+  
+    const user = await UserCollection.findOneByUsername(req.body.username as string);
+    if (!user) {
+      res.status(404).json({
+        error: `A user with username ${req.body.username as string} does not exist.`
+      });
+      return;
+    }
+  
+    next();
+  };
+
   export {
     isValidFeedNameContent,
     isValidFolloweeModifier,
     isFolloweeExists,
     isFolloweeParamsExists,
-    isFolloweeQueryExists
+    isFolloweeQueryExists,
+    isFolloweeUserExists,
   };
