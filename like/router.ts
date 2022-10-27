@@ -32,7 +32,7 @@ router.get(
     '/',
     async (req: Request, res: Response, next: NextFunction) => {
 
-      if (req.query.userId !== undefined) next();
+      if (req.query.author !== undefined) next();
       else if (req.query.freetId !== undefined) next('route');
     },
     [

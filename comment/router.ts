@@ -52,7 +52,7 @@ const router = express.Router();
 /**
  * Get comments made on a specific fsreet.
  *
- * @name GET /api/likes?freetId=FREET
+ * @name GET /api/comments?freetId=FREET
  *
  * @return {CommentResponse[]} - An array of comments made towards freet with freetId 
  * @throws {400} - If freetId is not given
